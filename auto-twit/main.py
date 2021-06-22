@@ -59,7 +59,7 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, signal_handler)
     signal.signal(signal.SIGINT, signal_handler)
     everyTimeOfTheDayTweetJob = EveryTimeOfTheDayJob(
-        execute=tweetFromFirestore, hour=23, minute=23, second=0)
+        execute=tweetFromFirestore, hour=0, minute=33, second=0)
     everyTimeOfTheDayTweetJob.start()
 
     while True:

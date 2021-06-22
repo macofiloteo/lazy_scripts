@@ -1,13 +1,15 @@
 import twitter
 import firebase_admin
+import os
 from firebase_admin import credentials
 from firebase_admin import firestore
 
 #Twitter Api
-CONSUMER_KEY = "JcebnYst5gQRAR6X1pUJshOOZ"
-CONSUMER_SECRET = "VygAVLJgpZMA4AiiIX6XgjvQxwP8WwvR7oSal5MxhIN4EGRwyI"
-ACCESS_TOKEN = "69463291-n0p6A0j26XujzDZzKLtRYIzlqbwvgzgJtWg71G7qg"
-ACCESS_SECRET = "m39TAWgCyx4WdwkqnIYxiKizhhgOPpsPGTiFfwcW0B9Hq"
+
+CONSUMER_KEY = os.getenv("TWITTER_CONSUMER_KEY")
+CONSUMER_SECRET = os.getenv("TWITTER_CONSUMER_SECRET")
+ACCESS_TOKEN = os.getenv("TWITTER_ACCESS_TOKEN")
+ACCESS_SECRET = os.getenv("TWITTER_ACCESS_SECRET")
 
 #Firestore Admin
 cred = credentials.Certificate("serviceAccountKey.json")
