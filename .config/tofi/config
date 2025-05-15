@@ -1,0 +1,15 @@
+width = 100%
+height = 100%
+border-width = 0
+outline-width = 0
+padding-left = 35%
+padding-top = 35%
+result-spacing = 25
+num-results = 5
+font = monospace
+background-color = #000A
+selection-color = #ADCCED
+prompt-color = #6D8196
+input-color = #6D8196
+default-result-color = #6D9196
+alternate-result-color = #6D9196

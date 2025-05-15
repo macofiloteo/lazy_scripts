@@ -1,0 +1,14 @@
+[general]
+import = [
+    "~/.config/alacritty/tokyo_night_enhanced.toml"
+]
+
+[window]
+# startup_mode = "Fullscreen"
+opacity = 0.92
+blur = false
+padding = { x = 20, y = 5 }
+
+
+[font]
+size = 22
