@@ -9,8 +9,6 @@ except ImportError:  # pragma: nocover
     import pickle
 
 
-
-
 class FirestoreDBJobstore(BaseJobStore):
     """
     Stores jobs in a MongoDB database. Any leftover keyword arguments are directly passed to
