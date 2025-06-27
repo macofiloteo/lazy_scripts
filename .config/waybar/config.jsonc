@@ -9,8 +9,9 @@
    "margin-left": 10,
  "margin-right": 10,
  "margin-top": 7,
- "margin-bottom": 0,
-    "exclusive": true,
+ "margin-bottom": -10,
+ "width": 850,
+ "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
@@ -19,8 +20,8 @@
 // positions generated based on config.ctl //
 
 	"modules-left": ["custom/smallspacer","hyprland/workspaces","custom/spacer","mpris"],
-	"modules-center": ["custom/padd","custom/l_end","custom/r_end","hyprland/window","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","group/expand","network","group/expand-3","group/expand-2","group/expand-4","memory","cpu","clock","custom/notification","custom/padd"],
+	"modules-center": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","group/expand","bluetooth","network","group/expand-3","group/expand-2","memory","cpu","custom/padd"],
 
 
 // sourced from modules based on config.ctl //
@@ -31,7 +32,6 @@
     "on-click": "~/mouse.sh",
     "tooltip": false,
 },
-
 "upower": {
      "icon-size": 20,
       "format": "",
@@ -47,17 +47,6 @@
 "show-icon": false,
 "tooltip": false,
 },
-
-"group/expand-4": {
-     "orientation": "horizontal",
-     "drawer": {
-         "transition-duration": 600,
-         "children-class": "not-power",
-       "transition-to-left": true,
-         "click-to-reveal": true
-     },
-     "modules": ["upower","upower/headset"]
-   },
 
 "custom/smallspacer":{
 "format": " ",
@@ -303,9 +292,10 @@
     },
 
     "clock": {
-        "format": "{:%I:%M %p}",
+        "interval": 1,
+	"format": "{:%a %b %d %H:%M:%S}",
         "rotate": 0,
-       "on-click": "/usr/local/bin/ags -t ActivityCenter",
+        "on-click": "/usr/local/bin/ags -t ActivityCenter",
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
             "mode": "month",
@@ -326,28 +316,7 @@
             "on-scroll-down": "shift_down"
         }
     },
-
-
-    "battery": {
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 20
-        },
-        "format": "{icon}",
-        "rotate": 0,
-        "format-charging": "<span color='#a6d189'>󱐋</span>",
-        "format-plugged": "󰂄",
-       // "format-alt": "<<span weight='bold' color='#c2864a'>{time} <span weight='bold' color='white'>| <span weight='bold' color='#82d457'>{capacity}%</span></span></span>",
-        "format-icons": ["󰝦","󰪞","󰪟","󰪠","󰪡","󰪢","󰪣","󰪤","󰪥"],
-     //  "format-icons": ["","","","","","","",""],  
-       //"format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        "on-click-right": "pkill waybar & hyprctl dispatch exec waybar",
-      //  "format-icons": [<i class='fa-solid fa-wifi-slash'></i>],
-    
-    },
-
-    "backlight": {
+      "backlight": {
         "device": "intel_backlight",
         "rotate": 0,
         "format": "{icon}",
@@ -377,7 +346,19 @@
      },
      "modules": ["pulseaudio","pulseaudio/slider"]
    },
-
+   "bluetooth": {
+	   "format": "",
+	   "format-on": "",
+	   "format-connected": "",
+	   "format-connected-battery": "",
+	   "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	   "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	   "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	   "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	   "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}%",
+   	   "on-click": "bluetoothctl power $(bluetoothctl show | grep -q \"Powered: yes\" && echo off || echo on)",
+   	"on-click-right": "bluetoothctl pairable $(bluetoothctl show | grep -q \"Pairable: yes\" && echo off || echo on)",
+   },
     "network": {
         "tooltip": true,
         "format-wifi": "{icon} ",
@@ -423,34 +404,7 @@
         "scroll-step": 5
     },
 
-    "custom/notifications": {
-        "tooltip": false,
-        "format": "{icon} {}",
-        "rotate": 0,
-        "format-icons": {
-            "email-notification": "<span foreground='white'><sup></sup></span>",
-            "chat-notification": "󱋊<span foreground='white'><sup></sup></span>",
-            "warning-notification": "󱨪<span foreground='yellow'><sup></sup></span>",
-            "error-notification": "󱨪<span foreground='red'><sup></sup></span>",
-            "network-notification": "󱂇<span foreground='white'><sup></sup></span>",
-            "battery-notification": "󰁺<span foreground='white'><sup></sup></span>",
-            "update-notification": "󰚰<span foreground='white'><sup></sup></span>",
-            "music-notification": "󰝚<span foreground='white'><sup></sup></span>",
-            "volume-notification": "󰕿<span foreground='white'><sup></sup></span>",
-            "notification": "<span foreground='white'><sup></sup></span>",
-            "none": ""
-        },
-        "return-type": "json",
-        "exec-if": "which dunstctl",
-        "exec": "notifications.py",
-        "on-click": "sleep 0.1 && dunstctl history-pop",
-        "on-click-middle": "dunstctl history-clear",
-        "on-click-right": "dunstctl close-all",
-        "interval": 1,
-        "tooltip": true,
-        "escape": true
-    },
-
+   
     "custom/keybindhint": {
         "format": " ",
         "rotate": 0,

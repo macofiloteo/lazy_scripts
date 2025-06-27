@@ -1,5 +1,5 @@
 require("moonfly").custom_colors({
-  bg = "#000000",
+    bg = "none",
 })
 
 vim.cmd [[colorscheme moonfly]]
