@@ -1,14 +1,9 @@
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
+        print("LSP client attached to buffer")
         local c = vim.lsp.get_client_by_id(ev.data.client_id)
         if not c then return end
 
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = ev.buf,
-            callback = function()
-                vim.lsp.buf.format({ bufnr = ev.buf, id = c.id })
-            end,
-        })
         -- Buffer local mappings
         -- Check `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf, silent = true }
