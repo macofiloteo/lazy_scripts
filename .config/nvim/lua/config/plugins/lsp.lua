@@ -11,7 +11,6 @@ return {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "lua_ls",
-                    "rust_analyzer",
                     "pyright",
                     "ts_ls",
                     "clangd"
@@ -24,7 +23,6 @@ return {
         config = function()
             local nvim_lspconfig = require("lspconfig")
             nvim_lspconfig.lua_ls.setup({})
-            nvim_lspconfig.rust_analyzer.setup({})
             nvim_lspconfig.pyright.setup({})
             nvim_lspconfig.ts_ls.setup({})
             nvim_lspconfig.clangd.setup({})

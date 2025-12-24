@@ -18,6 +18,7 @@ return {
         formatters_by_ft = {
             lua = { "lua_ls" },
             python = { "black" },
+            rust = { "rustfmt" }
         },
         -- Set default options
         default_format_opts = {

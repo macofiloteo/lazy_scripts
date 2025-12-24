@@ -2,7 +2,10 @@
 import = [
     "~/.config/alacritty/tokyo_night_enhanced.toml"
 ]
-
+[[keyboard.bindings]]
+key = "H"
+mods = "Control"
+action = "None"
 [window]
 # startup_mode = "Fullscreen"
 opacity = 0.92
